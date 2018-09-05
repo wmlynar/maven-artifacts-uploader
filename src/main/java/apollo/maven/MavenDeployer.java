@@ -45,6 +45,8 @@ public class MavenDeployer {
             writeResultToLog(gav, outputHandler, invocationResult);
         } catch (MavenInvocationException e) {
             logger.error(e.getMessage(), e);
+        } catch (Throwable t) {
+            logger.error(t.getMessage(), t);
         }
     }
 
