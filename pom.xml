@@ -5,13 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github</groupId>
-    <artifactId>nexus-uploader</artifactId>
+    <artifactId>maven-artifacts-uploader</artifactId>
     <version>1.0.1</version>
 
     <build>
         <resources>
             <resource>
                 <directory>${basedir}/conf</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <testSourceDirectory>src/test/java</testSourceDirectory>
@@ -41,7 +44,6 @@
                                 </transformer>
                             </transformers>
                             <finalName>${project.artifactId}</finalName>
-                            <outputDirectory>lib/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
