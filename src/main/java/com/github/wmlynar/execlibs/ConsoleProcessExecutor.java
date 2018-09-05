@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.concurrent.CountDownLatch;
 
 public class ConsoleProcessExecutor {
 
@@ -14,7 +15,7 @@ public class ConsoleProcessExecutor {
 	private Thread errorThread;
 
 	private boolean shutdown = false;
-
+	
 	public boolean start(String command) {
 
 		try {
@@ -30,7 +31,7 @@ public class ConsoleProcessExecutor {
 			public void run() {
 				String str;
 				try {
-					while ((str = br.readLine()) != null && !shutdown) {
+					while ((str = br.readLine()) != null && !shutdown && process.isAlive()) {
 						System.out.println(str);
 					}
 				} catch (IOException e) {
@@ -45,7 +46,7 @@ public class ConsoleProcessExecutor {
 			public void run() {
 				String str;
 				try {
-					while ((str = er.readLine()) != null && !shutdown) {
+					while ((str = er.readLine()) != null && !shutdown && process.isAlive()) {
 						System.err.println(str);
 					}
 				} catch (IOException e) {
