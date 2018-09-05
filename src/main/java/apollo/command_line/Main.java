@@ -18,6 +18,10 @@ public class Main {
 
 
     public static void main(String[] args) {
+        if(System.getProperty("maven.home") == null) {
+            System.setProperty("maven.home", "/usr");
+        }
+
         Injector injector = Guice.createInjector(new MavenModule(), new MavenCommandOptionsModule(), new XmlModule());
         OptionalArgs optionalArgs = injector.getInstance(OptionalArgs.class);
         JCommander jCommander = JCommander.newBuilder().addObject(optionalArgs).build();
